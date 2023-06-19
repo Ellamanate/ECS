@@ -8,15 +8,24 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
+    public const int Input = 0;
+    public const int Keyboard = 1;
+    public const int LookAt = 2;
+    public const int Movement = 3;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 4;
 
     public static readonly string[] componentNames = {
-
+        "Input",
+        "Keyboard",
+        "LookAt",
+        "Movement"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(LamaGamma.Components.Input),
+        typeof(LamaGamma.Components.Keyboard),
+        typeof(LamaGamma.Components.LookAt),
+        typeof(LamaGamma.Components.Movement)
     };
 }

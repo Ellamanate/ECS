@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public LamaGamma.Components.Health health { get { return (LamaGamma.Components.Health)GetComponent(GameComponentsLookup.Health); } }
-    public bool hasHealth { get { return HasComponent(GameComponentsLookup.Health); } }
+    public LamaGamma.Components.Rigidbody rigidbody { get { return (LamaGamma.Components.Rigidbody)GetComponent(GameComponentsLookup.Rigidbody); } }
+    public bool hasRigidbody { get { return HasComponent(GameComponentsLookup.Rigidbody); } }
 
-    public void AddHealth(float newValue) {
-        var index = GameComponentsLookup.Health;
-        var component = (LamaGamma.Components.Health)CreateComponent(index, typeof(LamaGamma.Components.Health));
+    public void AddRigidbody(UnityEngine.Rigidbody newValue) {
+        var index = GameComponentsLookup.Rigidbody;
+        var component = (LamaGamma.Components.Rigidbody)CreateComponent(index, typeof(LamaGamma.Components.Rigidbody));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceHealth(float newValue) {
-        var index = GameComponentsLookup.Health;
-        var component = (LamaGamma.Components.Health)CreateComponent(index, typeof(LamaGamma.Components.Health));
+    public void ReplaceRigidbody(UnityEngine.Rigidbody newValue) {
+        var index = GameComponentsLookup.Rigidbody;
+        var component = (LamaGamma.Components.Rigidbody)CreateComponent(index, typeof(LamaGamma.Components.Rigidbody));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveHealth() {
-        RemoveComponent(GameComponentsLookup.Health);
+    public void RemoveRigidbody() {
+        RemoveComponent(GameComponentsLookup.Rigidbody);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherHealth;
+    static Entitas.IMatcher<GameEntity> _matcherRigidbody;
 
-    public static Entitas.IMatcher<GameEntity> Health {
+    public static Entitas.IMatcher<GameEntity> Rigidbody {
         get {
-            if (_matcherHealth == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Health);
+            if (_matcherRigidbody == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Rigidbody);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherHealth = matcher;
+                _matcherRigidbody = matcher;
             }
 
-            return _matcherHealth;
+            return _matcherRigidbody;
         }
     }
 }
