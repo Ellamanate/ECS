@@ -11,16 +11,16 @@ public static class GameComponentsLookup {
     public const int DestructedListener = 0;
     public const int HealthListener = 1;
     public const int Borders = 2;
-    public const int Camera = 3;
-    public const int Destructed = 4;
-    public const int Health = 5;
+    public const int Destructed = 3;
+    public const int Health = 4;
+    public const int MoveSpeed = 5;
     public const int Player = 6;
     public const int Position = 7;
     public const int Rigidbody = 8;
     public const int Rotation = 9;
     public const int RotationAngle = 10;
-    public const int SmoothingFactor = 11;
-    public const int Speed = 12;
+    public const int RotationSpeed = 11;
+    public const int SmoothingRotation = 12;
     public const int PositionListener = 13;
     public const int RotationListener = 14;
 
@@ -30,16 +30,16 @@ public static class GameComponentsLookup {
         "DestructedListener",
         "HealthListener",
         "Borders",
-        "Camera",
         "Destructed",
         "Health",
+        "MoveSpeed",
         "Player",
         "Position",
         "Rigidbody",
         "Rotation",
         "RotationAngle",
-        "SmoothingFactor",
-        "Speed",
+        "RotationSpeed",
+        "SmoothingRotation",
         "PositionListener",
         "RotationListener"
     };
@@ -48,16 +48,16 @@ public static class GameComponentsLookup {
         typeof(DestructedListenerComponent),
         typeof(HealthListenerComponent),
         typeof(LamaGamma.Components.Borders),
-        typeof(LamaGamma.Components.Camera),
         typeof(LamaGamma.Components.Destructed),
         typeof(LamaGamma.Components.Health),
+        typeof(LamaGamma.Components.MoveSpeed),
         typeof(LamaGamma.Components.Player),
         typeof(LamaGamma.Components.Position),
         typeof(LamaGamma.Components.Rigidbody),
         typeof(LamaGamma.Components.Rotation),
         typeof(LamaGamma.Components.RotationAngle),
-        typeof(LamaGamma.Components.SmoothingFactor),
-        typeof(LamaGamma.Components.Speed),
+        typeof(LamaGamma.Components.RotationSpeed),
+        typeof(LamaGamma.Components.SmoothingRotation),
         typeof(PositionListenerComponent),
         typeof(RotationListenerComponent)
     };

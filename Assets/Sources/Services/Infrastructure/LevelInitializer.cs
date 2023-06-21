@@ -1,5 +1,6 @@
 ﻿using LamaGamma.Infrastructure;
 using LamaGamma.Services;
+using UnityEngine;
 
 namespace LamaGamma.Game
 {
@@ -22,6 +23,7 @@ namespace LamaGamma.Game
         {
             _eCSController.Initialize();
             _playerFactory.Create();
+            Application.targetFrameRate = 60;
         }
     }
 }

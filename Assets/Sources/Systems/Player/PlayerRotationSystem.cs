@@ -14,7 +14,7 @@ namespace LamaGamma.Systems
         {
             _contexts = contexts;
             _players = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player));
-			_inputs = _contexts.input.GetGroup(InputMatcher.AllOf(InputMatcher.Keyboard));
+			_inputs = _contexts.input.GetGroup(InputMatcher.AllOf(InputMatcher.Input));
 		}
 
         public void Execute()
@@ -29,13 +29,11 @@ namespace LamaGamma.Systems
 
         private void CalculateRotationAngle(InputEntity input, GameEntity player)
         {
-            float newHorizontalInput = input.lookAt.Value.x;
-            float newVerticalInput = input.lookAt.Value.y;
+            Smooth(input, player, out float newHorizontalInput, out float newVerticalInput);
+
             float currentXAngle = player.rotationAngle.Value.x;
             float currentYAngle = player.rotationAngle.Value.y;
-            float speed = player.hasSpeed ? player.speed.Value : 1;
-
-            Smooth(input, player, ref newHorizontalInput, ref newVerticalInput);
+            float speed = player.hasRotationSpeed ? player.rotationSpeed.Value : 1;
 
             currentXAngle += newHorizontalInput * speed;
             currentYAngle -= newVerticalInput * speed;
@@ -49,15 +47,29 @@ namespace LamaGamma.Systems
             player.ReplaceRotation(rotation);
         }
 
-        private void Smooth(InputEntity input, GameEntity player, ref float newHorizontalInput, ref float newVerticalInput)
+        private void Smooth(InputEntity input, GameEntity player, out float newHorizontalInput, out float newVerticalInput)
         {
-            if (player.hasSmoothingFactor && input.hasPreviousLookAt)
+            newHorizontalInput = input.lookAt.Value.x;
+            newVerticalInput = input.lookAt.Value.y;
+
+            if (player.hasSmoothingRotation)
             {
-                float oldHorizontalInput = input.previousLookAt.Value.x;
-                float oldVerticalInput = input.previousLookAt.Value.y;
-                float smoothingFactor = player.smoothingFactor.Value;
-                newHorizontalInput = Mathf.Lerp(oldHorizontalInput, newHorizontalInput, Time.deltaTime * smoothingFactor);
-                newVerticalInput = Mathf.Lerp(oldVerticalInput, newVerticalInput, Time.deltaTime * smoothingFactor);
+                var smoothingFactor = player.smoothingRotation.Value;
+
+                if (smoothingFactor.SmoothFactor != 0)
+                {
+                    float oldHorizontalInput = smoothingFactor.SmoothValue.x;
+                    float oldVerticalInput = smoothingFactor.SmoothValue.y;
+
+                    newHorizontalInput = Mathf.Lerp(oldHorizontalInput, newHorizontalInput, Time.deltaTime / smoothingFactor.SmoothFactor);
+                    newVerticalInput = Mathf.Lerp(oldVerticalInput, newVerticalInput, Time.deltaTime / smoothingFactor.SmoothFactor);
+
+                    player.ReplaceSmoothingRotation(new SmoothVector3
+                    {
+                        SmoothFactor = smoothingFactor.SmoothFactor,
+                        SmoothValue = new Vector3(newHorizontalInput, newVerticalInput, 0)
+                    });
+                }
             }
         }
 

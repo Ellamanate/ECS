@@ -13,7 +13,7 @@ namespace LamaGamma.Systems
         {
             _contexts = contexts;
             _players = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player));
-            _inputs = _contexts.input.GetGroup(InputMatcher.AllOf(InputMatcher.Keyboard));
+            _inputs = _contexts.input.GetGroup(InputMatcher.AllOf(InputMatcher.Input));
         }
 
         public void Execute()
@@ -25,7 +25,8 @@ namespace LamaGamma.Systems
                 {
                     var inputDirection = new Vector3(input.movement.Value.x, player.rigidbody.Value.velocity.y, input.movement.Value.y);
                     var rotation = player.hasRotation ? Quaternion.Euler(0, player.rotation.Value.eulerAngles.y, 0) : Quaternion.identity;
-                    player.rigidbody.Value.velocity = rotation * inputDirection;
+                    float speed = player.hasMoveSpeed ? player.moveSpeed.Value : 1;
+                    player.rigidbody.Value.velocity = rotation * inputDirection * speed;
                 }
 
                 player.ReplacePosition(player.rigidbody.Value.position);

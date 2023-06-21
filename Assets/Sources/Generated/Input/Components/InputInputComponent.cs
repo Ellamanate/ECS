@@ -9,30 +9,19 @@
 public partial class InputContext {
 
     public InputEntity inputEntity { get { return GetGroup(InputMatcher.Input).GetSingleEntity(); } }
-    public LamaGamma.Components.Input input { get { return inputEntity.input; } }
-    public bool hasInput { get { return inputEntity != null; } }
 
-    public InputEntity SetInput(LamaGamma.Services.InputService newValue) {
-        if (hasInput) {
-            throw new Entitas.EntitasException("Could not set Input!\n" + this + " already has an entity with LamaGamma.Components.Input!",
-                "You should check if the context already has a inputEntity before setting it or use context.ReplaceInput().");
+    public bool isInput {
+        get { return inputEntity != null; }
+        set {
+            var entity = inputEntity;
+            if (value != (entity != null)) {
+                if (value) {
+                    CreateEntity().isInput = true;
+                } else {
+                    entity.Destroy();
+                }
+            }
         }
-        var entity = CreateEntity();
-        entity.AddInput(newValue);
-        return entity;
-    }
-
-    public void ReplaceInput(LamaGamma.Services.InputService newValue) {
-        var entity = inputEntity;
-        if (entity == null) {
-            entity = SetInput(newValue);
-        } else {
-            entity.ReplaceInput(newValue);
-        }
-    }
-
-    public void RemoveInput() {
-        inputEntity.Destroy();
     }
 }
 
@@ -46,25 +35,25 @@ public partial class InputContext {
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    public LamaGamma.Components.Input input { get { return (LamaGamma.Components.Input)GetComponent(InputComponentsLookup.Input); } }
-    public bool hasInput { get { return HasComponent(InputComponentsLookup.Input); } }
+    static readonly LamaGamma.Components.Input inputComponent = new LamaGamma.Components.Input();
 
-    public void AddInput(LamaGamma.Services.InputService newValue) {
-        var index = InputComponentsLookup.Input;
-        var component = (LamaGamma.Components.Input)CreateComponent(index, typeof(LamaGamma.Components.Input));
-        component.Value = newValue;
-        AddComponent(index, component);
-    }
+    public bool isInput {
+        get { return HasComponent(InputComponentsLookup.Input); }
+        set {
+            if (value != isInput) {
+                var index = InputComponentsLookup.Input;
+                if (value) {
+                    var componentPool = GetComponentPool(index);
+                    var component = componentPool.Count > 0
+                            ? componentPool.Pop()
+                            : inputComponent;
 
-    public void ReplaceInput(LamaGamma.Services.InputService newValue) {
-        var index = InputComponentsLookup.Input;
-        var component = (LamaGamma.Components.Input)CreateComponent(index, typeof(LamaGamma.Components.Input));
-        component.Value = newValue;
-        ReplaceComponent(index, component);
-    }
-
-    public void RemoveInput() {
-        RemoveComponent(InputComponentsLookup.Input);
+                    AddComponent(index, component);
+                } else {
+                    RemoveComponent(index);
+                }
+            }
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace LamaGamma.Systems
 
         public void Initialize()
         {
-            _input.isKeyboard = true;
+            _input.isInput = true;
         }
     }
 }

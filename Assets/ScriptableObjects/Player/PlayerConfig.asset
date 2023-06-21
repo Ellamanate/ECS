@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f66fb980b5cdc614ea45c07252fc2b93, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 564441965882013439, guid: 24d819334fb2bd44d87e2bf34b07dcab, type: 3}
+  <ViewPrefab>k__BackingField: {fileID: 6051391032991275630, guid: 24d819334fb2bd44d87e2bf34b07dcab, type: 3}

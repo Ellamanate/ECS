@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: CameraConfig
   m_EditorClassIdentifier: 
   <Borders>k__BackingField:
-    UpperVerticalLimit: 70
-    LowerVerticalLimit: 70
+    UpperVerticalLimit: 65
+    LowerVerticalLimit: 65
     LeftHorizontalLimit: 180
     RightHorizontalLimit: 180
     AngleXOrigin: 0
   <CameraSpeed>k__BackingField: 1
   <SmoothCameraRotation>k__BackingField: 1
-  <CameraSmoothingFactor>k__BackingField: 25
+  <CameraSmoothingFactor>k__BackingField: 0.15

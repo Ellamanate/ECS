@@ -6,23 +6,22 @@ namespace LamaGamma.Systems
     public class EmitInputSystem : IExecuteSystem
     {
         private readonly InputContext _context;
-        private readonly IGroup<InputEntity> _keyboard;
+        private readonly IGroup<InputEntity> _input;
 
-        private InputService Input => _context.input.Value;
+        private InputService Input => _context.inputService.Value;
 
         public EmitInputSystem(InputContext contexts)
         {
             _context = contexts;
-            _keyboard = _context.GetGroup(InputMatcher.Keyboard);
+            _input = _context.GetGroup(InputMatcher.Input);
         }
 
         public void Execute()
         {
-            foreach (var keyboard in _keyboard)
+            foreach (var input in _input)
             {
-                keyboard.ReplaceMovement(Input.Movement);
-                keyboard.ReplacePreviousLookAt(Input.PreviousLookAt);
-                keyboard.ReplaceLookAt(Input.LookAt);
+                input.ReplaceMovement(Input.Movement);
+                input.ReplaceLookAt(Input.LookAt);
             }
         }
     }

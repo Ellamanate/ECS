@@ -1,10 +1,9 @@
-﻿namespace LamaGamma.Views
+﻿using UnityEngine;
+
+namespace LamaGamma.Views
 {
     public class PlayerView : UnityGameView
     {
-        protected override void Oninitialized()
-        {
-
-        }
+        [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
     }
 }
