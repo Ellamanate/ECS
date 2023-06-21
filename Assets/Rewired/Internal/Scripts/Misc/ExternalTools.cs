@@ -416,7 +416,7 @@ namespace Rewired.Utils {
 #if UNITY_2022_PLUS
             UnityEngine.Windows.Input.ForwardRawInput(rawInputHeaderIndices, rawInputDataIndices, indicesCount, rawInputData, rawInputDataSize);
 #elif UNITY_2021_2_OR_NEWER
-            //Rewired.Internal.Windows.Functions.ForwardRawInput(rawInputHeaderIndices, rawInputDataIndices, indicesCount, rawInputData, rawInputDataSize);
+            Rewired.Internal.Windows.Functions.ForwardRawInput(rawInputHeaderIndices, rawInputDataIndices, indicesCount, rawInputData, rawInputDataSize);
 #else
             throw new System.NotImplementedException();
 #endif

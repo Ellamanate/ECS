@@ -11,7 +11,7 @@ namespace LamaGamma.Systems
             GameContext game = contexts.game;
             InputContext input = contexts.input;
 
-            Add(new RegisterServiceSystem<IInputService>(services.InputService, input.ReplaceInput));
+            Add(new RegisterServiceSystem<InputService>(services.InputService, input.ReplaceInput));
         }
     }
 }

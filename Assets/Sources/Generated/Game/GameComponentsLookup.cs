@@ -10,26 +10,36 @@ public static class GameComponentsLookup {
 
     public const int DestructedListener = 0;
     public const int HealthListener = 1;
-    public const int Destructed = 2;
-    public const int Health = 3;
-    public const int Player = 4;
-    public const int Position = 5;
-    public const int Rigidbody = 6;
-    public const int Rotation = 7;
-    public const int PositionListener = 8;
-    public const int RotationListener = 9;
+    public const int Borders = 2;
+    public const int Camera = 3;
+    public const int Destructed = 4;
+    public const int Health = 5;
+    public const int Player = 6;
+    public const int Position = 7;
+    public const int Rigidbody = 8;
+    public const int Rotation = 9;
+    public const int RotationAngle = 10;
+    public const int SmoothingFactor = 11;
+    public const int Speed = 12;
+    public const int PositionListener = 13;
+    public const int RotationListener = 14;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 15;
 
     public static readonly string[] componentNames = {
         "DestructedListener",
         "HealthListener",
+        "Borders",
+        "Camera",
         "Destructed",
         "Health",
         "Player",
         "Position",
         "Rigidbody",
         "Rotation",
+        "RotationAngle",
+        "SmoothingFactor",
+        "Speed",
         "PositionListener",
         "RotationListener"
     };
@@ -37,12 +47,17 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(DestructedListenerComponent),
         typeof(HealthListenerComponent),
+        typeof(LamaGamma.Components.Borders),
+        typeof(LamaGamma.Components.Camera),
         typeof(LamaGamma.Components.Destructed),
         typeof(LamaGamma.Components.Health),
         typeof(LamaGamma.Components.Player),
         typeof(LamaGamma.Components.Position),
         typeof(LamaGamma.Components.Rigidbody),
         typeof(LamaGamma.Components.Rotation),
+        typeof(LamaGamma.Components.RotationAngle),
+        typeof(LamaGamma.Components.SmoothingFactor),
+        typeof(LamaGamma.Components.Speed),
         typeof(PositionListenerComponent),
         typeof(RotationListenerComponent)
     };

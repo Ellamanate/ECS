@@ -12,7 +12,7 @@ public partial class InputContext {
     public LamaGamma.Components.Input input { get { return inputEntity.input; } }
     public bool hasInput { get { return inputEntity != null; } }
 
-    public InputEntity SetInput(LamaGamma.Services.IInputService newValue) {
+    public InputEntity SetInput(LamaGamma.Services.InputService newValue) {
         if (hasInput) {
             throw new Entitas.EntitasException("Could not set Input!\n" + this + " already has an entity with LamaGamma.Components.Input!",
                 "You should check if the context already has a inputEntity before setting it or use context.ReplaceInput().");
@@ -22,7 +22,7 @@ public partial class InputContext {
         return entity;
     }
 
-    public void ReplaceInput(LamaGamma.Services.IInputService newValue) {
+    public void ReplaceInput(LamaGamma.Services.InputService newValue) {
         var entity = inputEntity;
         if (entity == null) {
             entity = SetInput(newValue);
@@ -49,14 +49,14 @@ public partial class InputEntity {
     public LamaGamma.Components.Input input { get { return (LamaGamma.Components.Input)GetComponent(InputComponentsLookup.Input); } }
     public bool hasInput { get { return HasComponent(InputComponentsLookup.Input); } }
 
-    public void AddInput(LamaGamma.Services.IInputService newValue) {
+    public void AddInput(LamaGamma.Services.InputService newValue) {
         var index = InputComponentsLookup.Input;
         var component = (LamaGamma.Components.Input)CreateComponent(index, typeof(LamaGamma.Components.Input));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceInput(LamaGamma.Services.IInputService newValue) {
+    public void ReplaceInput(LamaGamma.Services.InputService newValue) {
         var index = InputComponentsLookup.Input;
         var component = (LamaGamma.Components.Input)CreateComponent(index, typeof(LamaGamma.Components.Input));
         component.Value = newValue;

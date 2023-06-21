@@ -1,11 +1,14 @@
 ﻿using LamaGamma.Game;
 using LamaGamma.Services;
+using UnityEngine;
 using Zenject;
 
 namespace LamaGamma.Infrastructure
 {
     public class LevelInstaller : MonoInstaller, IInitializable
     {
+        [SerializeField] private LevelReferences _levelReferences;
+
         public override void InstallBindings()
         {
             Container
@@ -24,6 +27,7 @@ namespace LamaGamma.Infrastructure
 
         private void BindGame()
         {
+            Container.BindInstance(_levelReferences).AsSingle();
             Container.BindInterfacesAndSelfTo<ECSController>().AsSingle();
             Container.Bind<LevelInitializer>().AsSingle();
         }

@@ -12,20 +12,23 @@ public static class InputComponentsLookup {
     public const int Keyboard = 1;
     public const int LookAt = 2;
     public const int Movement = 3;
+    public const int PreviousLookAt = 4;
 
-    public const int TotalComponents = 4;
+    public const int TotalComponents = 5;
 
     public static readonly string[] componentNames = {
         "Input",
         "Keyboard",
         "LookAt",
-        "Movement"
+        "Movement",
+        "PreviousLookAt"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(LamaGamma.Components.Input),
         typeof(LamaGamma.Components.Keyboard),
         typeof(LamaGamma.Components.LookAt),
-        typeof(LamaGamma.Components.Movement)
+        typeof(LamaGamma.Components.Movement),
+        typeof(LamaGamma.Components.PreviousLookAt)
     };
 }

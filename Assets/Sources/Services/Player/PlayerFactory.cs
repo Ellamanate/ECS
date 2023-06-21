@@ -7,16 +7,15 @@ namespace LamaGamma.Services
         private readonly PlayerConfig _playerConfig;
         private readonly Contexts _contexts;
 
-        public PlayerFactory(PlayerConfig playerConfig)
+        public PlayerFactory(PlayerConfig playerConfig, Contexts contexts)
         {
             _playerConfig = playerConfig;
-            _contexts = Contexts.sharedInstance;
+            _contexts = contexts;
         }
 
         public void Create()
         {
             var entity = CreateEntity();
-
             var view = Object.Instantiate(_playerConfig.Prefab);
             view.Initialize(_contexts, entity);
         }
@@ -24,9 +23,8 @@ namespace LamaGamma.Services
         private GameEntity CreateEntity()
         {
             var entity = _contexts.game.CreateEntity();
-            entity.AddHealth(100);
-            entity.AddPosition(Vector3.zero);
             entity.isPlayer = true;
+            entity.AddRotationAngle(Vector2.zero);
 
             return entity;
         }

@@ -11,6 +11,7 @@ namespace LamaGamma.Systems
 
             Add(new InputSystems(contexts.input));
 
+            Add(new PlayerRotationSystem(contexts));
             Add(new PlayerMoveSystem(contexts));
             Add(new LogHealthSystem(contexts));
         }

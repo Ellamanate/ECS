@@ -10,13 +10,13 @@ namespace LamaGamma.Infrastructure
         private readonly Contexts _contexts;
         private readonly RootSystems _system;
 
-        public ECSController(InputService inputService)
+        public ECSController(Contexts contexts, InputService inputService)
         {
-            _contexts = Contexts.sharedInstance;
+            _contexts = contexts;
 
             var services = new MainGameServices
             {
-                InputService = inputService
+                InputService = inputService,
             };
 
             _system = new RootSystems(_contexts, services);

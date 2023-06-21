@@ -18,18 +18,18 @@ namespace LamaGamma.Systems
 
         public void Execute()
         {
-            foreach (var input in _inputs) 
+            foreach (var player in _players)
+            foreach (var input in _inputs)
             {
-                foreach (var player in _players)
+                if (player.hasRigidbody)
                 {
-                    if (player.hasRigidbody)
-                    {
-                        player.rigidbody.Value.position += (Vector3)input.movement.Value;
-                        player.rigidbody.Value.rotation 
-                            = Quaternion.Euler(player.rigidbody.Value.rotation.eulerAngles + (Vector3)input.lookAt.Value);
-                    }
+                    var inputDirection = new Vector3(input.movement.Value.x, player.rigidbody.Value.velocity.y, input.movement.Value.y);
+                    var rotation = player.hasRotation ? Quaternion.Euler(0, player.rotation.Value.eulerAngles.y, 0) : Quaternion.identity;
+                    player.rigidbody.Value.velocity = rotation * inputDirection;
                 }
+
+                player.ReplacePosition(player.rigidbody.Value.position);
             }
         }
-    }
+	}
 }

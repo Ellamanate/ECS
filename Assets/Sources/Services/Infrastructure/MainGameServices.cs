@@ -4,6 +4,6 @@ namespace LamaGamma.Infrastructure
 {
     public class MainGameServices
     {
-        public IInputService InputService;
+        public InputService InputService;
     }
 }

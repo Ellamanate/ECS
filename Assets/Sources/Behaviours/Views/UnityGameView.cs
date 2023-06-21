@@ -6,8 +6,8 @@ namespace LamaGamma.Views
 {
     public class UnityGameView : MonoBehaviour
     {
-        protected Contexts Contexts;
-        protected GameEntity LinkedEntity;
+        public Contexts Contexts;
+        public GameEntity LinkedEntity;
 
         public void Initialize(Contexts contexts, GameEntity entity)
         {
@@ -16,6 +16,7 @@ namespace LamaGamma.Views
             gameObject.Link(entity);
 
             RegisterViews(entity);
+            Oninitialized();
         }
 
         public virtual void DestroyView()
@@ -23,6 +24,8 @@ namespace LamaGamma.Views
             UnregisterViews(LinkedEntity);
             gameObject.DestroyGameObject();
         }
+
+        protected virtual void Oninitialized() { }
 
         private void RegisterViews(GameEntity entity)
         {

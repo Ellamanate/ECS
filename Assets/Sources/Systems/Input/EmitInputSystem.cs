@@ -8,7 +8,7 @@ namespace LamaGamma.Systems
         private readonly InputContext _context;
         private readonly IGroup<InputEntity> _keyboard;
 
-        private IInputService Input => _context.input.Value;
+        private InputService Input => _context.input.Value;
 
         public EmitInputSystem(InputContext contexts)
         {
@@ -21,6 +21,7 @@ namespace LamaGamma.Systems
             foreach (var keyboard in _keyboard)
             {
                 keyboard.ReplaceMovement(Input.Movement);
+                keyboard.ReplacePreviousLookAt(Input.PreviousLookAt);
                 keyboard.ReplaceLookAt(Input.LookAt);
             }
         }
