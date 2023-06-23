@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace LamaGamma.Services
+namespace LamaGamma
 {
     [Serializable]
 	public struct ViewBorders

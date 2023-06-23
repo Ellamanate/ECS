@@ -10,13 +10,15 @@ namespace LamaGamma.Infrastructure
         private readonly Contexts _contexts;
         private readonly RootSystems _system;
 
-        public ECSController(Contexts contexts, InputService inputService)
+        public ECSController(Contexts contexts, InputService inputService, PhysicsService physicsService, ViewsRegistrator viewsRegistrator)
         {
             _contexts = contexts;
 
             var services = new MainGameServices
             {
                 InputService = inputService,
+                PhysicsService = physicsService,
+                ViewsRegistrator = viewsRegistrator,
             };
 
             _system = new RootSystems(_contexts, services);

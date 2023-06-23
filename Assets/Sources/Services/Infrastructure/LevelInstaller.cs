@@ -30,6 +30,10 @@ namespace LamaGamma.Infrastructure
             Container.BindInstance(_levelReferences).AsSingle();
             Container.BindInterfacesAndSelfTo<ECSController>().AsSingle();
             Container.Bind<LevelInitializer>().AsSingle();
+            Container.Bind<PhysicsService>().AsSingle().WithArguments(_levelReferences.Camera);
+            Container.Bind<ViewsRegistrator>().AsSingle();
+            Container.Bind<GameIdentifierService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ViewsLinker>().AsSingle();
         }
 
         private void BindPlayer()

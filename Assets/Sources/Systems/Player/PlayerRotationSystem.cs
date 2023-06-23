@@ -64,10 +64,10 @@ namespace LamaGamma.Systems
                     newHorizontalInput = Mathf.Lerp(oldHorizontalInput, newHorizontalInput, Time.deltaTime / smoothingFactor.SmoothFactor);
                     newVerticalInput = Mathf.Lerp(oldVerticalInput, newVerticalInput, Time.deltaTime / smoothingFactor.SmoothFactor);
 
-                    player.ReplaceSmoothingRotation(new SmoothVector3
+                    player.ReplaceSmoothingRotation(new Smooth<Vector2>
                     {
                         SmoothFactor = smoothingFactor.SmoothFactor,
-                        SmoothValue = new Vector3(newHorizontalInput, newVerticalInput, 0)
+                        SmoothValue = new Vector2(newHorizontalInput, newVerticalInput)
                     });
                 }
             }
@@ -78,7 +78,9 @@ namespace LamaGamma.Systems
             if (player.hasBorders)
             {
                 var borders = player.borders.Value;
+
                 CalculateHorizontalLimit(borders, ref currentXAngle);
+
                 currentYAngle = Mathf.Clamp(currentYAngle, -borders.UpperVerticalLimit, borders.LowerVerticalLimit);
             }
             else

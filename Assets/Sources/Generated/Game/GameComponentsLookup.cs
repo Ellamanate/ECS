@@ -13,18 +13,21 @@ public static class GameComponentsLookup {
     public const int Borders = 2;
     public const int Destructed = 3;
     public const int Health = 4;
-    public const int MoveSpeed = 5;
-    public const int Player = 6;
-    public const int Position = 7;
-    public const int Rigidbody = 8;
-    public const int Rotation = 9;
-    public const int RotationAngle = 10;
-    public const int RotationSpeed = 11;
-    public const int SmoothingRotation = 12;
-    public const int PositionListener = 13;
-    public const int RotationListener = 14;
+    public const int Id = 5;
+    public const int InSightId = 6;
+    public const int MoveSpeed = 7;
+    public const int Player = 8;
+    public const int Position = 9;
+    public const int Raycasting = 10;
+    public const int Rigidbody = 11;
+    public const int Rotation = 12;
+    public const int RotationAngle = 13;
+    public const int RotationSpeed = 14;
+    public const int SmoothingRotation = 15;
+    public const int PositionListener = 16;
+    public const int RotationListener = 17;
 
-    public const int TotalComponents = 15;
+    public const int TotalComponents = 18;
 
     public static readonly string[] componentNames = {
         "DestructedListener",
@@ -32,9 +35,12 @@ public static class GameComponentsLookup {
         "Borders",
         "Destructed",
         "Health",
+        "Id",
+        "InSightId",
         "MoveSpeed",
         "Player",
         "Position",
+        "Raycasting",
         "Rigidbody",
         "Rotation",
         "RotationAngle",
@@ -50,9 +56,12 @@ public static class GameComponentsLookup {
         typeof(LamaGamma.Components.Borders),
         typeof(LamaGamma.Components.Destructed),
         typeof(LamaGamma.Components.Health),
+        typeof(LamaGamma.Components.Id),
+        typeof(LamaGamma.Components.InSightId),
         typeof(LamaGamma.Components.MoveSpeed),
         typeof(LamaGamma.Components.Player),
         typeof(LamaGamma.Components.Position),
+        typeof(LamaGamma.Components.Raycasting),
         typeof(LamaGamma.Components.Rigidbody),
         typeof(LamaGamma.Components.Rotation),
         typeof(LamaGamma.Components.RotationAngle),

@@ -13,6 +13,7 @@ namespace LamaGamma.Systems
 
             Add(new PlayerRotationSystem(contexts));
             Add(new PlayerMoveSystem(contexts));
+            Add(new RaycastSystem(contexts, services));
             Add(new LogHealthSystem(contexts));
         }
     }

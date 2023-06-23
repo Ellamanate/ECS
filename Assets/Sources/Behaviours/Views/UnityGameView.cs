@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace LamaGamma.Views
 {
-    public class UnityGameView : MonoBehaviour
+    public class UnityGameView : MonoBehaviour, IView
     {
         public Contexts Contexts { get; private set; }
         public GameEntity LinkedEntity { get; private set; }
+        public int InstanceId => gameObject.GetInstanceID();
 
         public void Initialize(Contexts contexts, GameEntity entity)
         {

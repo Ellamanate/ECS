@@ -11,14 +11,14 @@ public partial class GameEntity {
     public LamaGamma.Components.SmoothingRotation smoothingRotation { get { return (LamaGamma.Components.SmoothingRotation)GetComponent(GameComponentsLookup.SmoothingRotation); } }
     public bool hasSmoothingRotation { get { return HasComponent(GameComponentsLookup.SmoothingRotation); } }
 
-    public void AddSmoothingRotation(LamaGamma.Services.SmoothVector3 newValue) {
+    public void AddSmoothingRotation(LamaGamma.Services.Smooth<UnityEngine.Vector2> newValue) {
         var index = GameComponentsLookup.SmoothingRotation;
         var component = (LamaGamma.Components.SmoothingRotation)CreateComponent(index, typeof(LamaGamma.Components.SmoothingRotation));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceSmoothingRotation(LamaGamma.Services.SmoothVector3 newValue) {
+    public void ReplaceSmoothingRotation(LamaGamma.Services.Smooth<UnityEngine.Vector2> newValue) {
         var index = GameComponentsLookup.SmoothingRotation;
         var component = (LamaGamma.Components.SmoothingRotation)CreateComponent(index, typeof(LamaGamma.Components.SmoothingRotation));
         component.Value = newValue;

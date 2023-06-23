@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public LamaGamma.Components.Borders borders { get { return (LamaGamma.Components.Borders)GetComponent(GameComponentsLookup.Borders); } }
-    public bool hasBorders { get { return HasComponent(GameComponentsLookup.Borders); } }
+    public LamaGamma.Components.Id id { get { return (LamaGamma.Components.Id)GetComponent(GameComponentsLookup.Id); } }
+    public bool hasId { get { return HasComponent(GameComponentsLookup.Id); } }
 
-    public void AddBorders(LamaGamma.ViewBorders newValue) {
-        var index = GameComponentsLookup.Borders;
-        var component = (LamaGamma.Components.Borders)CreateComponent(index, typeof(LamaGamma.Components.Borders));
+    public void AddId(int newValue) {
+        var index = GameComponentsLookup.Id;
+        var component = (LamaGamma.Components.Id)CreateComponent(index, typeof(LamaGamma.Components.Id));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceBorders(LamaGamma.ViewBorders newValue) {
-        var index = GameComponentsLookup.Borders;
-        var component = (LamaGamma.Components.Borders)CreateComponent(index, typeof(LamaGamma.Components.Borders));
+    public void ReplaceId(int newValue) {
+        var index = GameComponentsLookup.Id;
+        var component = (LamaGamma.Components.Id)CreateComponent(index, typeof(LamaGamma.Components.Id));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveBorders() {
-        RemoveComponent(GameComponentsLookup.Borders);
+    public void RemoveId() {
+        RemoveComponent(GameComponentsLookup.Id);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherBorders;
+    static Entitas.IMatcher<GameEntity> _matcherId;
 
-    public static Entitas.IMatcher<GameEntity> Borders {
+    public static Entitas.IMatcher<GameEntity> Id {
         get {
-            if (_matcherBorders == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Borders);
+            if (_matcherId == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Id);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherBorders = matcher;
+                _matcherId = matcher;
             }
 
-            return _matcherBorders;
+            return _matcherId;
         }
     }
 }

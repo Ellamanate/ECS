@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   <ViewPrefab>k__BackingField: {fileID: 6051391032991275630, guid: 24d819334fb2bd44d87e2bf34b07dcab, type: 3}
+  <RaycastSettings>k__BackingField:
+    LayerMask:
+      serializedVersion: 2
+      m_Bits: 1
+    Distance: 10
+  <Speed>k__BackingField: 1

@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public LamaGamma.Components.Borders borders { get { return (LamaGamma.Components.Borders)GetComponent(GameComponentsLookup.Borders); } }
-    public bool hasBorders { get { return HasComponent(GameComponentsLookup.Borders); } }
+    public LamaGamma.Components.InSightId inSightId { get { return (LamaGamma.Components.InSightId)GetComponent(GameComponentsLookup.InSightId); } }
+    public bool hasInSightId { get { return HasComponent(GameComponentsLookup.InSightId); } }
 
-    public void AddBorders(LamaGamma.ViewBorders newValue) {
-        var index = GameComponentsLookup.Borders;
-        var component = (LamaGamma.Components.Borders)CreateComponent(index, typeof(LamaGamma.Components.Borders));
+    public void AddInSightId(int newValue) {
+        var index = GameComponentsLookup.InSightId;
+        var component = (LamaGamma.Components.InSightId)CreateComponent(index, typeof(LamaGamma.Components.InSightId));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceBorders(LamaGamma.ViewBorders newValue) {
-        var index = GameComponentsLookup.Borders;
-        var component = (LamaGamma.Components.Borders)CreateComponent(index, typeof(LamaGamma.Components.Borders));
+    public void ReplaceInSightId(int newValue) {
+        var index = GameComponentsLookup.InSightId;
+        var component = (LamaGamma.Components.InSightId)CreateComponent(index, typeof(LamaGamma.Components.InSightId));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveBorders() {
-        RemoveComponent(GameComponentsLookup.Borders);
+    public void RemoveInSightId() {
+        RemoveComponent(GameComponentsLookup.InSightId);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherBorders;
+    static Entitas.IMatcher<GameEntity> _matcherInSightId;
 
-    public static Entitas.IMatcher<GameEntity> Borders {
+    public static Entitas.IMatcher<GameEntity> InSightId {
         get {
-            if (_matcherBorders == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Borders);
+            if (_matcherInSightId == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.InSightId);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherBorders = matcher;
+                _matcherInSightId = matcher;
             }
 
-            return _matcherBorders;
+            return _matcherInSightId;
         }
     }
 }
