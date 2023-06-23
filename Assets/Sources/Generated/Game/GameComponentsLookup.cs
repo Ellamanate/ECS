@@ -10,33 +10,37 @@ public static class GameComponentsLookup {
 
     public const int DestructedListener = 0;
     public const int HealthListener = 1;
-    public const int Borders = 2;
-    public const int Destructed = 3;
-    public const int Health = 4;
-    public const int Id = 5;
-    public const int InSightId = 6;
-    public const int MoveSpeed = 7;
-    public const int Player = 8;
-    public const int Position = 9;
-    public const int Raycasting = 10;
-    public const int Rigidbody = 11;
-    public const int Rotation = 12;
-    public const int RotationAngle = 13;
-    public const int RotationSpeed = 14;
-    public const int SmoothingRotation = 15;
-    public const int PositionListener = 16;
-    public const int RotationListener = 17;
+    public const int InteractableListener = 2;
+    public const int Borders = 3;
+    public const int Destructed = 4;
+    public const int Health = 5;
+    public const int Id = 6;
+    public const int InSightId = 7;
+    public const int Interactable = 8;
+    public const int MoveSpeed = 9;
+    public const int Player = 10;
+    public const int Position = 11;
+    public const int Raycasting = 12;
+    public const int Rigidbody = 13;
+    public const int Rotation = 14;
+    public const int RotationAngle = 15;
+    public const int RotationSpeed = 16;
+    public const int SmoothingRotation = 17;
+    public const int PositionListener = 18;
+    public const int RotationListener = 19;
 
-    public const int TotalComponents = 18;
+    public const int TotalComponents = 20;
 
     public static readonly string[] componentNames = {
         "DestructedListener",
         "HealthListener",
+        "InteractableListener",
         "Borders",
         "Destructed",
         "Health",
         "Id",
         "InSightId",
+        "Interactable",
         "MoveSpeed",
         "Player",
         "Position",
@@ -53,11 +57,13 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(DestructedListenerComponent),
         typeof(HealthListenerComponent),
+        typeof(InteractableListenerComponent),
         typeof(LamaGamma.Components.Borders),
         typeof(LamaGamma.Components.Destructed),
         typeof(LamaGamma.Components.Health),
         typeof(LamaGamma.Components.Id),
         typeof(LamaGamma.Components.InSightId),
+        typeof(LamaGamma.Components.Interactable),
         typeof(LamaGamma.Components.MoveSpeed),
         typeof(LamaGamma.Components.Player),
         typeof(LamaGamma.Components.Position),

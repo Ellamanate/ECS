@@ -10,14 +10,16 @@ public static class InputComponentsLookup {
 
     public const int Input = 0;
     public const int InputService = 1;
-    public const int LookAt = 2;
-    public const int Movement = 3;
+    public const int InteractDown = 2;
+    public const int LookAt = 3;
+    public const int Movement = 4;
 
-    public const int TotalComponents = 4;
+    public const int TotalComponents = 5;
 
     public static readonly string[] componentNames = {
         "Input",
         "InputService",
+        "InteractDown",
         "LookAt",
         "Movement"
     };
@@ -25,6 +27,7 @@ public static class InputComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(LamaGamma.Components.Input),
         typeof(LamaGamma.Components.InputService),
+        typeof(LamaGamma.Components.InteractDown),
         typeof(LamaGamma.Components.LookAt),
         typeof(LamaGamma.Components.Movement)
     };

@@ -17,6 +17,7 @@ namespace LamaGamma.Services
 
         public Vector2 Movement => new Vector3(_player.GetAxis("MoveSide"), _player.GetAxis("MoveForward"));
         public Vector2 LookAt => new Vector2(_player.GetAxis("LookHorizontal"), _player.GetAxis("LookVertical"));
+        public bool Interact => _player.GetButtonDown("Interaction");
 
         public void Initialize()
         {

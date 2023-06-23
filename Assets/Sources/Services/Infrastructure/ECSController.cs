@@ -10,7 +10,8 @@ namespace LamaGamma.Infrastructure
         private readonly Contexts _contexts;
         private readonly RootSystems _system;
 
-        public ECSController(Contexts contexts, InputService inputService, PhysicsService physicsService, ViewsRegistrator viewsRegistrator)
+        public ECSController(Contexts contexts, InputService inputService, PhysicsService physicsService,
+            ViewsRegistrator viewsRegistrator, GameEntitysRegistrator entitysRegistrator)
         {
             _contexts = contexts;
 
@@ -19,6 +20,7 @@ namespace LamaGamma.Infrastructure
                 InputService = inputService,
                 PhysicsService = physicsService,
                 ViewsRegistrator = viewsRegistrator,
+                EntitysRegistrator = entitysRegistrator,
             };
 
             _system = new RootSystems(_contexts, services);
@@ -26,8 +28,8 @@ namespace LamaGamma.Infrastructure
 
         public void Dispose()
         {
-            //_system.DeactivateReactiveSystems();
-            //_contexts.Reset();
+            _system.DeactivateReactiveSystems();
+            _system.Cleanup();
         }
 
         public void Initialize()

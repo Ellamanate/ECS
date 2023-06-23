@@ -22,6 +22,7 @@ namespace LamaGamma.Services
         {
             var view = Object.Instantiate(_playerConfig.ViewPrefab);
             var entity = _linker.CreateEntity(view);
+
             AddComponents(entity, view);
         }
 

@@ -22,6 +22,7 @@ namespace LamaGamma.Systems
             {
                 input.ReplaceMovement(Input.Movement);
                 input.ReplaceLookAt(Input.LookAt);
+                input.isInteractDown = Input.Interact;
             }
         }
     }
