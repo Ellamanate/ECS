@@ -6,25 +6,25 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class HealthEventSystem : Entitas.ReactiveSystem<GameEntity> {
+public sealed class HealthEventSystem : Entitas.ReactiveSystem<GameplayEntity> {
 
     readonly System.Collections.Generic.List<IHealthListener> _listenerBuffer;
 
-    public HealthEventSystem(Contexts contexts) : base(contexts.game) {
+    public HealthEventSystem(Contexts contexts) : base(contexts.gameplay) {
         _listenerBuffer = new System.Collections.Generic.List<IHealthListener>();
     }
 
-    protected override Entitas.ICollector<GameEntity> GetTrigger(Entitas.IContext<GameEntity> context) {
+    protected override Entitas.ICollector<GameplayEntity> GetTrigger(Entitas.IContext<GameplayEntity> context) {
         return Entitas.CollectorContextExtension.CreateCollector(
-            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.Health)
+            context, Entitas.TriggerOnEventMatcherExtension.Added(GameplayMatcher.Health)
         );
     }
 
-    protected override bool Filter(GameEntity entity) {
+    protected override bool Filter(GameplayEntity entity) {
         return entity.hasHealth && entity.hasHealthListener;
     }
 
-    protected override void Execute(System.Collections.Generic.List<GameEntity> entities) {
+    protected override void Execute(System.Collections.Generic.List<GameplayEntity> entities) {
         foreach (var e in entities) {
             var component = e.health;
             _listenerBuffer.Clear();

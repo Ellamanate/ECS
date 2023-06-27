@@ -6,7 +6,7 @@ namespace LamaGamma.Infrastructure
     {
         public InputService InputService;
         public PhysicsService PhysicsService;
-        public ViewsRegistrator ViewsRegistrator;
+        public ECSViewsRegistrator ViewsRegistrator;
         public GameEntitysRegistrator EntitysRegistrator;
     }
 }

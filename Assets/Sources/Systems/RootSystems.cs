@@ -6,16 +6,12 @@ namespace LamaGamma.Systems
     {
         public RootSystems(Contexts contexts, MainGameServices services)
         {
-            Add(new GameEventSystems(contexts));
+            Add(new GameStateEventSystems(contexts));
+            Add(new GameplayEventSystems(contexts));
             Add(new ServiceRegistrationSystems(contexts, services));
-
             Add(new InputSystems(contexts.input));
-
-            Add(new PlayerRotationSystem(contexts));
-            Add(new PlayerMoveSystem(contexts));
-            Add(new RaycastSystem(contexts, services));
-            Add(new InteractSystem(contexts, services));
-            Add(new LogHealthSystem(contexts));
+            Add(new GameplaySystems(contexts, services));
+            Add(new UIEventSystems(contexts));
         }
     }
 }

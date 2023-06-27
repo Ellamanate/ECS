@@ -16,6 +16,6 @@ MonoBehaviour:
   <RaycastSettings>k__BackingField:
     LayerMask:
       serializedVersion: 2
-      m_Bits: 1
-    Distance: 10
-  <Speed>k__BackingField: 1
+      m_Bits: 65
+    Distance: 3.5
+  <Speed>k__BackingField: 5

@@ -7,13 +7,13 @@ namespace LamaGamma.Systems
     public class PlayerRotationSystem : IExecuteSystem
     {
         private readonly Contexts _contexts;
-        private readonly IGroup<GameEntity> _players;
+        private readonly IGroup<GameplayEntity> _players;
         private readonly IGroup<InputEntity> _inputs;
 
         public PlayerRotationSystem(Contexts contexts)
         {
             _contexts = contexts;
-            _players = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player));
+            _players = _contexts.gameplay.GetGroup(GameplayMatcher.AllOf(GameplayMatcher.Player));
 			_inputs = _contexts.input.GetGroup(InputMatcher.AllOf(InputMatcher.Input));
 		}
 
@@ -27,7 +27,7 @@ namespace LamaGamma.Systems
             }
         }
 
-        private void CalculateRotationAngle(InputEntity input, GameEntity player)
+        private void CalculateRotationAngle(InputEntity input, GameplayEntity player)
         {
             Smooth(input, player, out float newHorizontalInput, out float newVerticalInput);
 
@@ -47,7 +47,7 @@ namespace LamaGamma.Systems
             player.ReplaceRotation(rotation);
         }
 
-        private void Smooth(InputEntity input, GameEntity player, out float newHorizontalInput, out float newVerticalInput)
+        private void Smooth(InputEntity input, GameplayEntity player, out float newHorizontalInput, out float newVerticalInput)
         {
             newHorizontalInput = input.lookAt.Value.x;
             newVerticalInput = input.lookAt.Value.y;
@@ -73,7 +73,7 @@ namespace LamaGamma.Systems
             }
         }
 
-        private void CalculateBorders(GameEntity player, ref float currentXAngle, ref float currentYAngle)
+        private void CalculateBorders(GameplayEntity player, ref float currentXAngle, ref float currentYAngle)
         {
             if (player.hasBorders)
             {

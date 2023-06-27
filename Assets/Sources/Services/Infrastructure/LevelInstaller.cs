@@ -1,5 +1,7 @@
 ﻿using LamaGamma.Game;
 using LamaGamma.Services;
+using LamaGamma.Services.UI;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -12,13 +14,12 @@ namespace LamaGamma.Infrastructure
 
         public override void InstallBindings()
         {
-            Container
-                .BindInterfacesTo<LevelInstaller>()
-                .FromInstance(this)
-                .AsSingle();
-
+            var contexts = Container.Resolve<Contexts>();
+            BindGameState(contexts);
+            BindSelf();
             BindGame();
             BindPlayer();
+            BindUI(contexts);
         }
 
         public void Initialize()
@@ -27,13 +28,28 @@ namespace LamaGamma.Infrastructure
             Container.Resolve<LevelInitializer>().Initialize();
         }
 
+        private void BindSelf()
+        {
+            Container
+                .BindInterfacesTo<LevelInstaller>()
+                .FromInstance(this)
+                .AsSingle();
+        }
+
+        private void BindGameState(Contexts contexts)
+        {
+            var stateEntity = contexts.gameState.CreateEntity();
+            stateEntity.isState = true;
+            Container.Bind<GameStateEntity>().FromInstance(stateEntity);
+        }
+
         private void BindGame()
         {
             Container.BindInstance(_levelReferences).AsSingle();
-            Container.BindInterfacesAndSelfTo<ECSController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ECSManager>().AsSingle();
             Container.Bind<LevelInitializer>().AsSingle();
             Container.Bind<PhysicsService>().AsSingle().WithArguments(_levelReferences.Camera);
-            Container.Bind<ViewsRegistrator>().AsSingle();
+            Container.Bind<ECSViewsRegistrator>().AsSingle();
             Container.Bind<GameEntityFactory>().AsSingle();
             Container.Bind<GameEntitysRegistrator>().AsSingle();
             Container.Bind<GameIdentifierService>().AsSingle();
@@ -43,6 +59,24 @@ namespace LamaGamma.Infrastructure
         private void BindPlayer()
         {
             Container.Bind<PlayerFactory>().AsSingle();
+        }
+
+        private void BindUI(Contexts contexts)
+        {
+            BindViewModel<HUDViewModel, HUDBinder>(contexts, _levelReferences.HUDView);
+        }
+
+        private void BindViewModel<TViewModel, TBinder>(Contexts contexts, IView view)
+        {
+            var entity = contexts.uI.CreateEntity();
+
+            Container.Bind<TViewModel>().AsSingle().WithArguments(entity);
+            Container
+                .Bind(typeof(TBinder), typeof(IDisposable))
+                .To<TBinder>()
+                .AsSingle()
+                .WithArguments(view, entity)
+                .NonLazy();
         }
     }
 }

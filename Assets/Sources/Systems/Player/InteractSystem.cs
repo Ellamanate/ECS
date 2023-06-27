@@ -8,12 +8,12 @@ namespace LamaGamma.Systems
     public class InteractSystem : ReactiveSystem<InputEntity>
     {
         private readonly MainGameServices _services;
-        private readonly IGroup<GameEntity> _players;
+        private readonly IGroup<GameplayEntity> _players;
 
         public InteractSystem(Contexts contexts, MainGameServices services) : base(contexts.input)
         {
             _services = services;
-            _players = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player));
+            _players = contexts.gameplay.GetGroup(GameplayMatcher.AllOf(GameplayMatcher.Player));
         }
 
         protected override bool Filter(InputEntity entity) => entity.isInteractDown;
@@ -23,8 +23,7 @@ namespace LamaGamma.Systems
 
         protected override void Execute(List<InputEntity> interactInputs)
         {
-            foreach (InputEntity _ in interactInputs)
-            foreach (GameEntity player in _players)
+            foreach (GameplayEntity player in _players)
             {
                 var entity = _services.EntitysRegistrator.Take(player.inSightId.Value);
 

@@ -13,10 +13,10 @@
             _entitysRegistrator = entitysRegistrator;
         }
 
-        public GameEntity Create()
+        public GameplayEntity Create()
         {
             int id = _identifier.Next(Identity.General);
-            var entity = _contexts.game.CreateEntity();
+            var entity = _contexts.gameplay.CreateEntity();
             entity.ReplaceId(id);
 
             _entitysRegistrator.Register(id, entity);

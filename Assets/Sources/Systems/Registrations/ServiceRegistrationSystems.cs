@@ -8,7 +8,7 @@ namespace LamaGamma.Systems
         public ServiceRegistrationSystems(Contexts contexts, MainGameServices services)
           : base(nameof(ServiceRegistrationSystems))
         {
-            GameContext game = contexts.game;
+            GameplayContext game = contexts.gameplay;
             InputContext input = contexts.input;
 
             Add(new RegisterServiceSystem<InputService>(services.InputService, input.ReplaceInputService));

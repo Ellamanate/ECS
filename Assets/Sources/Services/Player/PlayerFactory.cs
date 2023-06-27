@@ -7,26 +7,31 @@ namespace LamaGamma.Services
     {
         private readonly PlayerConfig _playerConfig;
         private readonly CameraConfig _cameraConfig;
-        private readonly Contexts _contexts;
+        private readonly GameEntityFactory _entityFactory;
         private readonly ViewsLinker _linker;
 
-        public PlayerFactory(PlayerConfig playerConfig, CameraConfig cameraConfig, Contexts contexts, ViewsLinker linker)
+        public PlayerFactory(PlayerConfig playerConfig, CameraConfig cameraConfig,
+            GameEntityFactory entityFactory, ViewsLinker linker)
         {
             _playerConfig = playerConfig;
             _cameraConfig = cameraConfig;
-            _contexts = contexts;
+            _entityFactory = entityFactory;
             _linker = linker;
         }
 
-        public void Create()
+        public PlayerView Create()
         {
             var view = Object.Instantiate(_playerConfig.ViewPrefab);
-            var entity = _linker.CreateEntity(view);
+            var entity = _entityFactory.Create();
+
+            _linker.LinkEntity(view, entity);
 
             AddComponents(entity, view);
+
+            return view;
         }
 
-        private void AddComponents(GameEntity entity, PlayerView view)
+        private void AddComponents(GameplayEntity entity, PlayerView view)
         {
             entity.isPlayer = true;
             entity.ReplaceRigidbody(view.Rigidbody);

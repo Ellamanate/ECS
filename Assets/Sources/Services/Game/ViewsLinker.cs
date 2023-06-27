@@ -6,11 +6,12 @@ namespace LamaGamma.Services
     public class ViewsLinker : IInitializable
     {
         private readonly Contexts _contexts;
-        private readonly ViewsRegistrator _registrator;
+        private readonly ECSViewsRegistrator _registrator;
         private readonly GameEntityFactory _entityFactory;
-        private readonly IView[] _views;
+        private readonly IGameplayView[] _views;
 
-        public ViewsLinker(Contexts contexts, ViewsRegistrator registrator, GameEntityFactory entityFactory, IView[] views)
+        public ViewsLinker(Contexts contexts, ECSViewsRegistrator registrator,
+            GameEntityFactory entityFactory, IGameplayView[] views)
         {
             _contexts = contexts;
             _registrator = registrator;
@@ -22,19 +23,17 @@ namespace LamaGamma.Services
         {
             foreach (var view in _views)
             {
-                var entity = CreateEntity(view);
+                var entity = _entityFactory.Create();
                 entity.isInteractable = true;
+
+                LinkEntity(view, entity);
             }
         }
 
-        public GameEntity CreateEntity(IView view)
+        public void LinkEntity(IGameplayView view, GameplayEntity entity)
         {
-            var entity = _entityFactory.Create();
             view.Initialize(_contexts, entity);
-
             _registrator.Register(view.InstanceId, view);
-
-            return entity;
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public interface IViewRegistraction
     {
-        public void Register(GameEntity entity);
-        public void Unregister(GameEntity entity);
+        public void Register(GameplayEntity entity);
+        public void Unregister(GameplayEntity entity);
     }
 }

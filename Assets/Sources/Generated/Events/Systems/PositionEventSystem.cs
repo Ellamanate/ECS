@@ -6,25 +6,25 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class PositionEventSystem : Entitas.ReactiveSystem<GameEntity> {
+public sealed class PositionEventSystem : Entitas.ReactiveSystem<GameplayEntity> {
 
     readonly System.Collections.Generic.List<IPositionListener> _listenerBuffer;
 
-    public PositionEventSystem(Contexts contexts) : base(contexts.game) {
+    public PositionEventSystem(Contexts contexts) : base(contexts.gameplay) {
         _listenerBuffer = new System.Collections.Generic.List<IPositionListener>();
     }
 
-    protected override Entitas.ICollector<GameEntity> GetTrigger(Entitas.IContext<GameEntity> context) {
+    protected override Entitas.ICollector<GameplayEntity> GetTrigger(Entitas.IContext<GameplayEntity> context) {
         return Entitas.CollectorContextExtension.CreateCollector(
-            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.Position)
+            context, Entitas.TriggerOnEventMatcherExtension.Added(GameplayMatcher.Position)
         );
     }
 
-    protected override bool Filter(GameEntity entity) {
+    protected override bool Filter(GameplayEntity entity) {
         return entity.hasPosition && entity.hasPositionListener;
     }
 
-    protected override void Execute(System.Collections.Generic.List<GameEntity> entities) {
+    protected override void Execute(System.Collections.Generic.List<GameplayEntity> entities) {
         foreach (var e in entities) {
             var component = e.position;
             _listenerBuffer.Clear();

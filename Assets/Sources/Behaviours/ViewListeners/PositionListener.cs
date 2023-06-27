@@ -6,17 +6,17 @@ namespace LamaGamma.Views
     {
         [SerializeField] private Transform _transform;
 
-        public void Register(GameEntity entity)
+        public void Register(GameplayEntity entity)
         {
             entity.AddPositionListener(this);
         }
 
-        public void Unregister(GameEntity entity)
+        public void Unregister(GameplayEntity entity)
         {
             entity.RemovePositionListener(this);
         }
 
-        public void OnPosition(GameEntity entity, Vector3 value)
+        public void OnPosition(GameplayEntity entity, Vector3 value)
         {
             _transform.position = value;
         }

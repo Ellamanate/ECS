@@ -21,14 +21,18 @@ public partial class Contexts : Entitas.IContexts {
 
     static Contexts _sharedInstance;
 
-    public GameContext game { get; set; }
+    public GameplayContext gameplay { get; set; }
+    public GameStateContext gameState { get; set; }
     public InputContext input { get; set; }
+    public UIContext uI { get; set; }
 
-    public Entitas.IContext[] allContexts { get { return new Entitas.IContext [] { game, input }; } }
+    public Entitas.IContext[] allContexts { get { return new Entitas.IContext [] { gameplay, gameState, input, uI }; } }
 
     public Contexts() {
-        game = new GameContext();
+        gameplay = new GameplayContext();
+        gameState = new GameStateContext();
         input = new InputContext();
+        uI = new UIContext();
 
         var postConstructors = System.Linq.Enumerable.Where(
             GetType().GetMethods(),
@@ -63,26 +67,26 @@ public partial class Contexts {
 
     [Entitas.CodeGeneration.Attributes.PostConstructor]
     public void InitializeEntityIndices() {
-        game.AddEntityIndex(new Entitas.PrimaryEntityIndex<GameEntity, int>(
+        gameplay.AddEntityIndex(new Entitas.PrimaryEntityIndex<GameplayEntity, int>(
             Id,
-            game.GetGroup(GameMatcher.Id),
+            gameplay.GetGroup(GameplayMatcher.Id),
             (e, c) => ((LamaGamma.Components.Id)c).Value));
 
-        game.AddEntityIndex(new Entitas.EntityIndex<GameEntity, int>(
+        gameplay.AddEntityIndex(new Entitas.EntityIndex<GameplayEntity, int>(
             InSightId,
-            game.GetGroup(GameMatcher.InSightId),
+            gameplay.GetGroup(GameplayMatcher.InSightId),
             (e, c) => ((LamaGamma.Components.InSightId)c).Value));
     }
 }
 
 public static class ContextsExtensions {
 
-    public static GameEntity GetEntityWithId(this GameContext context, int Value) {
-        return ((Entitas.PrimaryEntityIndex<GameEntity, int>)context.GetEntityIndex(Contexts.Id)).GetEntity(Value);
+    public static GameplayEntity GetEntityWithId(this GameplayContext context, int Value) {
+        return ((Entitas.PrimaryEntityIndex<GameplayEntity, int>)context.GetEntityIndex(Contexts.Id)).GetEntity(Value);
     }
 
-    public static System.Collections.Generic.HashSet<GameEntity> GetEntitiesWithInSightId(this GameContext context, int Value) {
-        return ((Entitas.EntityIndex<GameEntity, int>)context.GetEntityIndex(Contexts.InSightId)).GetEntities(Value);
+    public static System.Collections.Generic.HashSet<GameplayEntity> GetEntitiesWithInSightId(this GameplayContext context, int Value) {
+        return ((Entitas.EntityIndex<GameplayEntity, int>)context.GetEntityIndex(Contexts.InSightId)).GetEntities(Value);
     }
 }
 //------------------------------------------------------------------------------
@@ -100,8 +104,10 @@ public partial class Contexts {
     [Entitas.CodeGeneration.Attributes.PostConstructor]
     public void InitializeContextObservers() {
         try {
-            CreateContextObserver(game);
+            CreateContextObserver(gameplay);
+            CreateContextObserver(gameState);
             CreateContextObserver(input);
+            CreateContextObserver(uI);
         } catch(System.Exception) {
         }
     }

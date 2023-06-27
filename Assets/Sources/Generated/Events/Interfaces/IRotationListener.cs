@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IRotationListener {
-    void OnRotation(GameEntity entity, UnityEngine.Quaternion value);
+    void OnRotation(GameplayEntity entity, UnityEngine.Quaternion value);
 }

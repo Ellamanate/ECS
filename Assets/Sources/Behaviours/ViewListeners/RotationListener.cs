@@ -6,17 +6,17 @@ namespace LamaGamma.Views
     {
         [SerializeField] private Transform _transform;
 
-        public void Register(GameEntity entity)
+        public void Register(GameplayEntity entity)
         {
             entity.AddRotationListener(this);
         }
 
-        public void Unregister(GameEntity entity)
+        public void Unregister(GameplayEntity entity)
         {
             entity.RemoveRotationListener(this);
         }
 
-        public void OnRotation(GameEntity entity, Quaternion value)
+        public void OnRotation(GameplayEntity entity, Quaternion value)
         {
             _transform.rotation = value;
         }

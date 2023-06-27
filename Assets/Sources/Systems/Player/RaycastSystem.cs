@@ -7,13 +7,13 @@ namespace LamaGamma.Systems
     {
         private readonly Contexts _contexts;
         private readonly MainGameServices _services;
-        private readonly IGroup<GameEntity> _players;
+        private readonly IGroup<GameplayEntity> _players;
 
         public RaycastSystem(Contexts contexts, MainGameServices services)
         {
             _contexts = contexts;
             _services = services;
-            _players = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player));
+            _players = _contexts.gameplay.GetGroup(GameplayMatcher.AllOf(GameplayMatcher.Player));
         }
 
         public void Execute()

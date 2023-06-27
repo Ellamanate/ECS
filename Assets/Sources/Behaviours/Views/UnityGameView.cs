@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace LamaGamma.Views
 {
-    public class UnityGameView : MonoBehaviour, IView
+    public class UnityGameView : MonoBehaviour, IGameplayView
     {
         public Contexts Contexts { get; private set; }
-        public GameEntity LinkedEntity { get; private set; }
+        public GameplayEntity LinkedEntity { get; private set; }
         public int InstanceId => gameObject.GetInstanceID();
 
-        public void Initialize(Contexts contexts, GameEntity entity)
+        public void Initialize(Contexts contexts, GameplayEntity entity)
         {
             Contexts = contexts;
             LinkedEntity = entity;
@@ -25,13 +25,13 @@ namespace LamaGamma.Views
             gameObject.DestroyGameObject();
         }
 
-        private void RegisterViews(GameEntity entity)
+        private void RegisterViews(GameplayEntity entity)
         {
             foreach (var listener in GetComponents<IViewRegistraction>())
                 listener.Register(entity);
         }
 
-        private void UnregisterViews(GameEntity entity)
+        private void UnregisterViews(GameplayEntity entity)
         {
             foreach (var listener in GetComponents<IViewRegistraction>())
                 listener.Unregister(entity);
