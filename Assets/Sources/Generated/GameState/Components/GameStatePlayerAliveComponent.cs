@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameStateEntity {
 
-    public LamaGamma.Components.PlayerAlive playerAlive { get { return (LamaGamma.Components.PlayerAlive)GetComponent(GameStateComponentsLookup.PlayerAlive); } }
-    public bool hasPlayerAlive { get { return HasComponent(GameStateComponentsLookup.PlayerAlive); } }
+    static readonly LamaGamma.Components.PlayerAlive playerAliveComponent = new LamaGamma.Components.PlayerAlive();
 
-    public void AddPlayerAlive(bool newValue) {
-        var index = GameStateComponentsLookup.PlayerAlive;
-        var component = (LamaGamma.Components.PlayerAlive)CreateComponent(index, typeof(LamaGamma.Components.PlayerAlive));
-        component.Value = newValue;
-        AddComponent(index, component);
-    }
+    public bool isPlayerAlive {
+        get { return HasComponent(GameStateComponentsLookup.PlayerAlive); }
+        set {
+            if (value != isPlayerAlive) {
+                var index = GameStateComponentsLookup.PlayerAlive;
+                if (value) {
+                    var componentPool = GetComponentPool(index);
+                    var component = componentPool.Count > 0
+                            ? componentPool.Pop()
+                            : playerAliveComponent;
 
-    public void ReplacePlayerAlive(bool newValue) {
-        var index = GameStateComponentsLookup.PlayerAlive;
-        var component = (LamaGamma.Components.PlayerAlive)CreateComponent(index, typeof(LamaGamma.Components.PlayerAlive));
-        component.Value = newValue;
-        ReplaceComponent(index, component);
-    }
-
-    public void RemovePlayerAlive() {
-        RemoveComponent(GameStateComponentsLookup.PlayerAlive);
+                    AddComponent(index, component);
+                } else {
+                    RemoveComponent(index);
+                }
+            }
+        }
     }
 }
 

@@ -9,6 +9,7 @@
 public sealed class UIEventSystems : Feature {
 
     public UIEventSystems(Contexts contexts) {
-        Add(new FadeEventSystem(contexts)); // priority: 0
+        Add(new InteractButtonFadeEventSystem(contexts)); // priority: 0
+        Add(new WindowFadeEventSystem(contexts)); // priority: 0
     }
 }

@@ -8,18 +8,24 @@
 //------------------------------------------------------------------------------
 public static class UIComponentsLookup {
 
-    public const int FadeListener = 0;
-    public const int Fade = 1;
+    public const int InteractButtonFadeListener = 0;
+    public const int InteractButtonFade = 1;
+    public const int WindowFade = 2;
+    public const int WindowFadeListener = 3;
 
-    public const int TotalComponents = 2;
+    public const int TotalComponents = 4;
 
     public static readonly string[] componentNames = {
-        "FadeListener",
-        "Fade"
+        "InteractButtonFadeListener",
+        "InteractButtonFade",
+        "WindowFade",
+        "WindowFadeListener"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(FadeListenerComponent),
-        typeof(LamaGamma.Components.Fade)
+        typeof(InteractButtonFadeListenerComponent),
+        typeof(LamaGamma.Components.InteractButtonFade),
+        typeof(LamaGamma.Components.WindowFade),
+        typeof(WindowFadeListenerComponent)
     };
 }

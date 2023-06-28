@@ -16,10 +16,10 @@ namespace LamaGamma.Infrastructure
         {
             var contexts = Container.Resolve<Contexts>();
             BindGameState(contexts);
-            BindSelf();
             BindGame();
             BindPlayer();
             BindUI(contexts);
+            BindSelf();
         }
 
         public void Initialize()
@@ -30,16 +30,14 @@ namespace LamaGamma.Infrastructure
 
         private void BindSelf()
         {
-            Container
-                .BindInterfacesTo<LevelInstaller>()
-                .FromInstance(this)
-                .AsSingle();
+            Container.BindInterfacesTo<LevelInstaller>().FromInstance(this).AsSingle();
         }
 
         private void BindGameState(Contexts contexts)
         {
             var stateEntity = contexts.gameState.CreateEntity();
             stateEntity.isState = true;
+            stateEntity.ReplaceCanInteract(false);
             Container.Bind<GameStateEntity>().FromInstance(stateEntity);
         }
 
@@ -70,9 +68,9 @@ namespace LamaGamma.Infrastructure
         {
             var entity = contexts.uI.CreateEntity();
 
-            Container.Bind<TViewModel>().AsSingle().WithArguments(entity);
+            Container.BindInterfacesAndSelfTo<TViewModel>().AsSingle().WithArguments(entity);
             Container
-                .Bind(typeof(TBinder), typeof(IDisposable))
+                .Bind(typeof(TBinder), typeof(IDisposable), typeof(IInitializable))
                 .To<TBinder>()
                 .AsSingle()
                 .WithArguments(view, entity)

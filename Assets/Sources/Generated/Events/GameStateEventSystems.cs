@@ -9,6 +9,7 @@
 public sealed class GameStateEventSystems : Feature {
 
     public GameStateEventSystems(Contexts contexts) {
+        Add(new CanInteractEventSystem(contexts)); // priority: 0
         Add(new WindowEventSystem(contexts)); // priority: 0
     }
 }

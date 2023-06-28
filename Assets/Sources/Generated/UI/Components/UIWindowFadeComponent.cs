@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class UIEntity {
 
-    public LamaGamma.Components.Fade fade { get { return (LamaGamma.Components.Fade)GetComponent(UIComponentsLookup.Fade); } }
-    public bool hasFade { get { return HasComponent(UIComponentsLookup.Fade); } }
+    public LamaGamma.Components.WindowFade windowFade { get { return (LamaGamma.Components.WindowFade)GetComponent(UIComponentsLookup.WindowFade); } }
+    public bool hasWindowFade { get { return HasComponent(UIComponentsLookup.WindowFade); } }
 
-    public void AddFade(float newValue) {
-        var index = UIComponentsLookup.Fade;
-        var component = (LamaGamma.Components.Fade)CreateComponent(index, typeof(LamaGamma.Components.Fade));
+    public void AddWindowFade(float newValue) {
+        var index = UIComponentsLookup.WindowFade;
+        var component = (LamaGamma.Components.WindowFade)CreateComponent(index, typeof(LamaGamma.Components.WindowFade));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceFade(float newValue) {
-        var index = UIComponentsLookup.Fade;
-        var component = (LamaGamma.Components.Fade)CreateComponent(index, typeof(LamaGamma.Components.Fade));
+    public void ReplaceWindowFade(float newValue) {
+        var index = UIComponentsLookup.WindowFade;
+        var component = (LamaGamma.Components.WindowFade)CreateComponent(index, typeof(LamaGamma.Components.WindowFade));
         component.Value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveFade() {
-        RemoveComponent(UIComponentsLookup.Fade);
+    public void RemoveWindowFade() {
+        RemoveComponent(UIComponentsLookup.WindowFade);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class UIEntity {
 //------------------------------------------------------------------------------
 public sealed partial class UIMatcher {
 
-    static Entitas.IMatcher<UIEntity> _matcherFade;
+    static Entitas.IMatcher<UIEntity> _matcherWindowFade;
 
-    public static Entitas.IMatcher<UIEntity> Fade {
+    public static Entitas.IMatcher<UIEntity> WindowFade {
         get {
-            if (_matcherFade == null) {
-                var matcher = (Entitas.Matcher<UIEntity>)Entitas.Matcher<UIEntity>.AllOf(UIComponentsLookup.Fade);
+            if (_matcherWindowFade == null) {
+                var matcher = (Entitas.Matcher<UIEntity>)Entitas.Matcher<UIEntity>.AllOf(UIComponentsLookup.WindowFade);
                 matcher.componentNames = UIComponentsLookup.componentNames;
-                _matcherFade = matcher;
+                _matcherWindowFade = matcher;
             }
 
-            return _matcherFade;
+            return _matcherWindowFade;
         }
     }
 }

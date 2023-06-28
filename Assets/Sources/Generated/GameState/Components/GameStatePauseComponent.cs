@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameStateEntity {
 
-    public LamaGamma.Components.Pause pause { get { return (LamaGamma.Components.Pause)GetComponent(GameStateComponentsLookup.Pause); } }
-    public bool hasPause { get { return HasComponent(GameStateComponentsLookup.Pause); } }
+    static readonly LamaGamma.Components.Pause pauseComponent = new LamaGamma.Components.Pause();
 
-    public void AddPause(bool newValue) {
-        var index = GameStateComponentsLookup.Pause;
-        var component = (LamaGamma.Components.Pause)CreateComponent(index, typeof(LamaGamma.Components.Pause));
-        component.Value = newValue;
-        AddComponent(index, component);
-    }
+    public bool isPause {
+        get { return HasComponent(GameStateComponentsLookup.Pause); }
+        set {
+            if (value != isPause) {
+                var index = GameStateComponentsLookup.Pause;
+                if (value) {
+                    var componentPool = GetComponentPool(index);
+                    var component = componentPool.Count > 0
+                            ? componentPool.Pop()
+                            : pauseComponent;
 
-    public void ReplacePause(bool newValue) {
-        var index = GameStateComponentsLookup.Pause;
-        var component = (LamaGamma.Components.Pause)CreateComponent(index, typeof(LamaGamma.Components.Pause));
-        component.Value = newValue;
-        ReplaceComponent(index, component);
-    }
-
-    public void RemovePause() {
-        RemoveComponent(GameStateComponentsLookup.Pause);
+                    AddComponent(index, component);
+                } else {
+                    RemoveComponent(index);
+                }
+            }
+        }
     }
 }
 

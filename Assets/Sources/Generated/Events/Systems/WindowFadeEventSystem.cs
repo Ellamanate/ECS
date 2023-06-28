@@ -6,31 +6,31 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class FadeEventSystem : Entitas.ReactiveSystem<UIEntity> {
+public sealed class WindowFadeEventSystem : Entitas.ReactiveSystem<UIEntity> {
 
-    readonly System.Collections.Generic.List<IFadeListener> _listenerBuffer;
+    readonly System.Collections.Generic.List<IWindowFadeListener> _listenerBuffer;
 
-    public FadeEventSystem(Contexts contexts) : base(contexts.uI) {
-        _listenerBuffer = new System.Collections.Generic.List<IFadeListener>();
+    public WindowFadeEventSystem(Contexts contexts) : base(contexts.uI) {
+        _listenerBuffer = new System.Collections.Generic.List<IWindowFadeListener>();
     }
 
     protected override Entitas.ICollector<UIEntity> GetTrigger(Entitas.IContext<UIEntity> context) {
         return Entitas.CollectorContextExtension.CreateCollector(
-            context, Entitas.TriggerOnEventMatcherExtension.Added(UIMatcher.Fade)
+            context, Entitas.TriggerOnEventMatcherExtension.Added(UIMatcher.WindowFade)
         );
     }
 
     protected override bool Filter(UIEntity entity) {
-        return entity.hasFade && entity.hasFadeListener;
+        return entity.hasWindowFade && entity.hasWindowFadeListener;
     }
 
     protected override void Execute(System.Collections.Generic.List<UIEntity> entities) {
         foreach (var e in entities) {
-            var component = e.fade;
+            var component = e.windowFade;
             _listenerBuffer.Clear();
-            _listenerBuffer.AddRange(e.fadeListener.value);
+            _listenerBuffer.AddRange(e.windowFadeListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnFade(e, component.Value);
+                listener.OnWindowFade(e, component.Value);
             }
         }
     }

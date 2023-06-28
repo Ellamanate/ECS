@@ -6,6 +6,6 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public interface IFadeListener {
-    void OnFade(UIEntity entity, float value);
+public interface ICanInteractListener {
+    void OnCanInteract(GameStateEntity entity, bool value);
 }

@@ -7,6 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 [Entitas.CodeGeneration.Attributes.DontGenerate(false)]
-public sealed class FadeListenerComponent : Entitas.IComponent {
-    public System.Collections.Generic.List<IFadeListener> value;
+public sealed class WindowFadeListenerComponent : Entitas.IComponent {
+    public System.Collections.Generic.List<IWindowFadeListener> value;
 }

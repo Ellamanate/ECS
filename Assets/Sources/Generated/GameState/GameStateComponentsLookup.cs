@@ -8,15 +8,19 @@
 //------------------------------------------------------------------------------
 public static class GameStateComponentsLookup {
 
-    public const int Pause = 0;
-    public const int PlayerAlive = 1;
-    public const int State = 2;
-    public const int Window = 3;
-    public const int WindowListener = 4;
+    public const int CanInteractListener = 0;
+    public const int CanInteract = 1;
+    public const int Pause = 2;
+    public const int PlayerAlive = 3;
+    public const int State = 4;
+    public const int Window = 5;
+    public const int WindowListener = 6;
 
-    public const int TotalComponents = 5;
+    public const int TotalComponents = 7;
 
     public static readonly string[] componentNames = {
+        "CanInteractListener",
+        "CanInteract",
         "Pause",
         "PlayerAlive",
         "State",
@@ -25,6 +29,8 @@ public static class GameStateComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(CanInteractListenerComponent),
+        typeof(LamaGamma.Components.CanInteract),
         typeof(LamaGamma.Components.Pause),
         typeof(LamaGamma.Components.PlayerAlive),
         typeof(LamaGamma.Components.State),

@@ -34,8 +34,10 @@ namespace LamaGamma.Components
 
     [Unique, GameState] public class State : IComponent { }
     [GameState, Event(Self)] public class Window : IComponent { public WindowType Value; }
-    [GameState] public class PlayerAlive : IComponent { public bool Value; }
-    [GameState] public class Pause : IComponent { public bool Value; }
+    [GameState, Event(Self)] public class CanInteract : IComponent { public bool Value; }
+    [GameState] public class PlayerAlive : IComponent { }
+    [GameState] public class Pause : IComponent { }
 
-    [UI, Event(Self)] public class Fade : IComponent { public float Value; }
+    [UI, Event(Self)] public class WindowFade : IComponent { public float Value; }
+    [UI, Event(Self)] public class InteractButtonFade : IComponent { public float Value; }
 }

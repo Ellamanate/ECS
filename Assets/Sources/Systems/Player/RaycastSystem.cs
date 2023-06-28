@@ -7,12 +7,14 @@ namespace LamaGamma.Systems
     {
         private readonly Contexts _contexts;
         private readonly MainGameServices _services;
+        private readonly GameStateEntity _stateEntity;
         private readonly IGroup<GameplayEntity> _players;
 
         public RaycastSystem(Contexts contexts, MainGameServices services)
         {
             _contexts = contexts;
             _services = services;
+            _stateEntity = contexts.gameState.stateEntity;
             _players = _contexts.gameplay.GetGroup(GameplayMatcher.AllOf(GameplayMatcher.Player));
         }
 
@@ -25,11 +27,27 @@ namespace LamaGamma.Systems
                     && _services.PhysicsService.RaycastFromCamera(player.raycasting.Value, out var hit))
                 {
                     var view = _services.ViewsRegistrator.Take(hit.collider.gameObject.GetInstanceID());
-                    player.ReplaceInSightId(view != null ? view.LinkedEntity.id.Value : -1);
+
+                    if (view != null)
+                    {
+                        player.ReplaceInSightId(view.LinkedEntity.id.Value);
+
+                        bool canInteract = view.LinkedEntity.isInteractable;
+
+                        if (_stateEntity.hasCanInteract && _stateEntity.canInteract.Value != canInteract)
+                        {
+                            _stateEntity.ReplaceCanInteract(canInteract);
+                        }
+
+                        continue;
+                    }
                 }
-                else
+
+                player.ReplaceInSightId(-1);
+
+                if (_stateEntity.hasCanInteract && _stateEntity.canInteract.Value)
                 {
-                    player.ReplaceInSightId(-1);
+                    _stateEntity.ReplaceCanInteract(false);
                 }
             }
         }
