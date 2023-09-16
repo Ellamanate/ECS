@@ -31,23 +31,19 @@ namespace LamaGamma.Systems
                     if (view != null)
                     {
                         player.ReplaceInSightId(view.LinkedEntity.id.Value);
-
-                        bool canInteract = view.LinkedEntity.isInteractable;
-
-                        if (_stateEntity.hasCanInteract && _stateEntity.canInteract.Value != canInteract)
-                        {
-                            _stateEntity.ReplaceCanInteract(canInteract);
-                        }
+                        ReplaceInteract(view.LinkedEntity.isInteractable);
 
                         continue;
                     }
                 }
 
                 player.ReplaceInSightId(-1);
+                ReplaceInteract(false);
 
-                if (_stateEntity.hasCanInteract && _stateEntity.canInteract.Value)
+                void ReplaceInteract(bool canInteract)
                 {
-                    _stateEntity.ReplaceCanInteract(false);
+                    if (_stateEntity.hasCanInteract && _stateEntity.canInteract.Value != canInteract)
+                        _stateEntity.ReplaceCanInteract(canInteract);
                 }
             }
         }

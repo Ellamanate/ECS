@@ -7,9 +7,9 @@ namespace LamaGamma.Utils
     public static class AnimationExtensions
     {
         public static TweenerCore<float, float, FloatOptions> FadeAlpha(this TweenerCore<float, float, FloatOptions> tween, 
-            DOGetter<float> get, DOSetter<float> set, float duration, bool FadeIn)
+            DOGetter<float> get, DOSetter<float> set, float duration, bool fadeIn)
         {
-            if (FadeIn)
+            if (fadeIn)
                 Fade(ref tween, get, set, 1, duration);
             else
                 Fade(ref tween, get, set, 0, duration);
