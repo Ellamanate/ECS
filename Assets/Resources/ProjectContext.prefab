@@ -76,6 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerConfig: {fileID: 11400000, guid: ece5c1e272f4c7140b521a73194815bb, type: 2}
   _cameraConfig: {fileID: 11400000, guid: 9ea7e5de2068fc947b6ef59dbae5c189, type: 2}
+  _scenesConfig: {fileID: 11400000, guid: 82cb012ee05d4c14da572398093b2451, type: 2}
 --- !u!114 &7057259520959138627
 MonoBehaviour:
   m_ObjectHideFlags: 0

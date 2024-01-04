@@ -24,8 +24,8 @@ namespace LamaGamma.Services
         }
 
         public TValue Take(TKey key) =>
-          _objectsById.TryGetValue(key, out TValue value)
-            ? value
-            : default;
+            _objectsById.TryGetValue(key, out TValue value)
+                ? value
+                : default;
     }
 }

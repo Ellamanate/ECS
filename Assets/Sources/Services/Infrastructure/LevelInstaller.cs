@@ -10,7 +10,6 @@ namespace LamaGamma.Infrastructure
     public class LevelInstaller : MonoInstaller, IInitializable
     {
         [SerializeField] private LevelReferences _levelReferences;
-        [SerializeField] private int _frameRate = 60;
 
         public override void InstallBindings()
         {
@@ -24,7 +23,6 @@ namespace LamaGamma.Infrastructure
 
         public void Initialize()
         {
-            Application.targetFrameRate = _frameRate;
             Container.Resolve<LevelInitializer>().Initialize();
         }
 

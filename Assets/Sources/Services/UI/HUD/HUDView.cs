@@ -7,7 +7,7 @@ namespace LamaGamma.Services.UI
     public class HUDView : MonoBehaviour, IView
     {
         [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private Image _interactButton;
+        [SerializeField] private Graphic _interactButton;
 
         public void Initialize(UIEntity entity) { }
 

@@ -18,6 +18,6 @@ MonoBehaviour:
     LeftHorizontalLimit: 180
     RightHorizontalLimit: 180
     AngleXOrigin: 0
-  <CameraSpeed>k__BackingField: 1
+  <CameraSpeed>k__BackingField: 0.6
   <SmoothCameraRotation>k__BackingField: 1
-  <CameraSmoothingFactor>k__BackingField: 0.15
+  <CameraSmoothingFactor>k__BackingField: 0.075

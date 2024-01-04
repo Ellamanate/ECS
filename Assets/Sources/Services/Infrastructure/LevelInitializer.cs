@@ -1,5 +1,6 @@
 ﻿using LamaGamma.Infrastructure;
 using LamaGamma.Services;
+using UnityEngine;
 
 namespace LamaGamma.Game
 {
@@ -18,6 +19,10 @@ namespace LamaGamma.Game
 
         public void Initialize()
         {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
+            Application.targetFrameRate = 60;
+
             _eCSManager.Initialize();
             _playerFactory.Create();
             _gameState.ReplaceWindow(WindowType.HUD);

@@ -29,7 +29,7 @@ namespace LamaGamma.Systems
 
                 if (entity != null && entity.isInteractable) 
                 {
-                    Debug.LogError("Interact");
+                    Debug.Log("Interact");
                 }
             }
         }
